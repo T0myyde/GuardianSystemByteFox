@@ -1,5 +1,6 @@
 package ch.tom.bytefox.guardiansystembytefox;
 
+import ch.tom.bytefox.guardiansystembytefox.commands.ReportCommand;
 import ch.tom.bytefox.guardiansystembytefox.events.PlayerLoginEvent;
 import ch.tom.bytefox.guardiansystembytefox.mysql.banned.BannedService;
 import ch.tom.bytefox.guardiansystembytefox.mysql.report.ReportService;
@@ -40,6 +41,7 @@ public class GuardianSystemByteFox {
     @Subscribe
     public void onProxyInitialization(ProxyInitializeEvent event) {
         proxyServer.getEventManager().register(this, new PlayerLoginEvent(instance));
+        proxyServer.getCommandManager().register(proxyServer.getCommandManager().metaBuilder("report").build(), new ReportCommand(proxyServer));
     }
 
     public GuardianSystemByteFox getInstance() {
