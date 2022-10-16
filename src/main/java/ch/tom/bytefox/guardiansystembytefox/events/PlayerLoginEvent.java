@@ -21,7 +21,7 @@ public class PlayerLoginEvent {
         BytePlayer bytePlayer = CloudPlugin.api().getBytePlayerHandler().getBytePlayer(player.getUniqueId());
 
         if (plugin.getBannedService().get(player.getUniqueId().toString()) == null) {
-          
+            bytePlayer.setProperty("guard_banned", false);
         }
     }
 }
