@@ -3,6 +3,7 @@ package ch.tom.bytefox.guardiansystembytefox;
 import ch.tom.bytefox.guardiansystembytefox.commands.ReportCommand;
 import ch.tom.bytefox.guardiansystembytefox.events.PlayerLoginEvent;
 import ch.tom.bytefox.guardiansystembytefox.mysql.banned.BannedService;
+import ch.tom.bytefox.guardiansystembytefox.mysql.muted.MutedService;
 import ch.tom.bytefox.guardiansystembytefox.mysql.report.ReportService;
 import com.google.inject.Inject;
 import com.velocitypowered.api.event.proxy.ProxyInitializeEvent;
@@ -23,9 +24,10 @@ public class GuardianSystemByteFox {
     private Logger logger;
     private ProxyServer proxyServer;
     private GuardianSystemByteFox instance;
-    private ReportService reportService;
+    private final ReportService reportService;
+    private final BannedService bannedService;
 
-    private BannedService bannedService;
+    private final MutedService mutedService;
 
     @Inject
     public GuardianSystemByteFox(Logger logger, ProxyServer proxyServer) {
@@ -34,6 +36,7 @@ public class GuardianSystemByteFox {
         this.instance = this;
         this.reportService = new ReportService();
         this.bannedService = new BannedService();
+        this.mutedService = new MutedService();
 
         System.out.println("ByteFox | GuardSystem Started");
     }
@@ -62,5 +65,9 @@ public class GuardianSystemByteFox {
 
     public BannedService getBannedService() {
         return bannedService;
+    }
+
+    public MutedService getMutedService() {
+        return mutedService;
     }
 }
