@@ -2,7 +2,8 @@ package ch.tom.bytefox.guardiansystembytefox.enums;
 
 public enum Messages {
     PREFIX("§c§lGuardian §8§l| §r§7"),
-    NO_PERMISSIONS_MESSAGE(PREFIX + "§cDu hast keine Berechtigung für diesen Befehl.");
+    NO_PERMISSIONS_MESSAGE(PREFIX + "§cDu hast keine Berechtigung für diesen Befehl."),
+    NO_PLAYER_MESSAGE(PREFIX + "§cDer Spieler ist nicht erreichbar.");
 
     private String messages;
 

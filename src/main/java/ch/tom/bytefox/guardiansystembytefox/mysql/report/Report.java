@@ -4,16 +4,26 @@ public class Report {
 
     private int id;
     private String uuid;
+    private String target_uuid;
     private boolean open;
     private String reason;
 
-    public Report(String uuid, boolean open, String reason) {
+    public Report(String uuid, String target_uuid, boolean open, String reason) {
         this.uuid = uuid;
+        this.target_uuid = target_uuid;
         this.open = open;
         this.reason = reason;
     }
 
     public Report() {
+    }
+
+    public String getTarget_uuid() {
+        return target_uuid;
+    }
+
+    public void setTarget_uuid(String target_uuid) {
+        this.target_uuid = target_uuid;
     }
 
     public int getId() {

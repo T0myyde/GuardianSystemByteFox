@@ -21,9 +21,19 @@ public enum Reasons{
     public Integer getId() {
         return id;
     }
-
     public static int listGetLastIndex() {
         return list.length - 1;
+    }
+
+    public static String getById(int id) {
+        String reason = null;
+
+        for(Reasons e : values()) {
+            if(e.id.equals(id)){
+                reason = e.toString();
+            }
+        }
+        return reason;
     }
     public static int getId(String enumName) {
         return Reasons.valueOf(enumName).getId();

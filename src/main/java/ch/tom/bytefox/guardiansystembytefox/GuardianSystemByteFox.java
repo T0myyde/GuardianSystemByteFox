@@ -29,6 +29,8 @@ public class GuardianSystemByteFox {
 
     private final MutedService mutedService;
 
+    //TODO: TABLE target_uuid DELETE AND NEW TABLE CREATE
+
     @Inject
     public GuardianSystemByteFox(Logger logger, ProxyServer proxyServer) {
         this.logger = logger;
@@ -44,7 +46,7 @@ public class GuardianSystemByteFox {
     @Subscribe
     public void onProxyInitialization(ProxyInitializeEvent event) {
         proxyServer.getEventManager().register(this, new PlayerLoginEvent(instance));
-        proxyServer.getCommandManager().register(proxyServer.getCommandManager().metaBuilder("report").build(), new ReportCommand(proxyServer));
+        proxyServer.getCommandManager().register(proxyServer.getCommandManager().metaBuilder("report").build(), new ReportCommand(this));
     }
 
     public GuardianSystemByteFox getInstance() {

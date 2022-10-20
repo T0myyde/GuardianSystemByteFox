@@ -17,12 +17,13 @@ public class ReportRepositoryImp implements ReportRepository{
         try {
             Connection connection = CloudPlugin.api().getDeveloperDatabase().getMariaDBHandler().getSQLConnection().getDriverConnection();
 
-            String sql = "INSERT INTO `reports` (uuid, open, reason) VALUES(?,?,?)";
+            String sql = "INSERT INTO `reports` (uuid, target_uuid, open, reason) VALUES(?,?,?,?)";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
             preparedStatement.setString(1, report.getUuid());
-            preparedStatement.setBoolean(2, report.isOpen());
-            preparedStatement.setString(3, report.getReason());
+            preparedStatement.setString(2, report.getTarget_uuid());
+            preparedStatement.setBoolean(3, report.isOpen());
+            preparedStatement.setString(4, report.getReason());
             preparedStatement.executeUpdate();
         }catch (Exception e) {
             e.printStackTrace();
@@ -57,8 +58,9 @@ public class ReportRepositoryImp implements ReportRepository{
             preparedStatement.setInt(1, id);
             ResultSet rs = preparedStatement.executeQuery();
             if (rs.next()) {
-                user.setId(rs.getInt("id"));
+                user.setId(id);
                 user.setUuid(rs.getString("uuid"));
+                user.setTarget_uuid(rs.getString("target_uuid"));
                 user.setOpen(rs.getBoolean("open"));
                 user.setReason(rs.getString("reason"));
             }
@@ -79,7 +81,8 @@ public class ReportRepositoryImp implements ReportRepository{
             ResultSet rs = preparedStatement.executeQuery();
             if (rs.next()) {
                 user.setId(rs.getInt("id"));
-                user.setUuid(rs.getString("uuid"));
+                user.setUuid(uuid);
+                user.setTarget_uuid(rs.getString("target_uuid"));
                 user.setOpen(rs.getBoolean("open"));
                 user.setReason(rs.getString("reason"));
             }
@@ -100,6 +103,7 @@ public class ReportRepositoryImp implements ReportRepository{
             while (rs.next()) {
                 reports.add(new Report(
                         rs.getString("uuid"),
+                        rs.getString("target_uuid"),
                         rs.getBoolean("open"),
                         rs.getString("reason")
                         ));
