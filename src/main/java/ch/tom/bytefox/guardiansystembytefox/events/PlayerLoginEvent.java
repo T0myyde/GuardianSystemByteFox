@@ -21,7 +21,18 @@ public class PlayerLoginEvent {
         BytePlayer bytePlayer = CloudPlugin.api().getBytePlayerHandler().getBytePlayer(player.getUniqueId());
 
         if (plugin.getBannedService().get(player.getUniqueId().toString()) == null) {
-            bytePlayer.setProperty("guard_banned", false);
+            bytePlayer.setProperty("Guard_Banned", false);
+        } else {
+            bytePlayer.setProperty("Guard_Banned", true);
+            player.disconnect(Component.text("§cYou are banned!\nReason: " + plugin.getBannedService().get(player.getUniqueId().toString()).getReason()));
+        }
+
+
+
+        if (plugin.getMutedService().get(player.getUniqueId().toString()) == null) {
+            bytePlayer.setProperty("Guard_Muted", false);
+        } else {
+            bytePlayer.setProperty("Guard_Muted", true);
         }
     }
 }
