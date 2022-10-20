@@ -10,24 +10,22 @@ public enum Reasons{
     HACKING(1),
     BUGUSING(2),
     TEAMING(3),
-    SPAMING(4);
+    SPAMING(4),
+    TEST(5),
+    JANSTINKT(6);
     private Integer id;
+    private static Reasons[] list = Reasons.values();
     Reasons(Integer value) {
         this.id = value;
     }
     public Integer getId() {
         return id;
     }
-    @Nullable
-    public static Reasons fromId(Integer id) {
-        for (Reasons at : Reasons.values()) {
-            if (at.getId().equals(id)) {
-                return at;
-            }
-        }
-        return null;
+
+    public static int listGetLastIndex() {
+        return list.length - 1;
     }
-    public static int getId(String enumCountryName) {
-        return Reasons.valueOf(enumCountryName).getId();
+    public static int getId(String enumName) {
+        return Reasons.valueOf(enumName).getId();
     }
 }
